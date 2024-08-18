@@ -7,86 +7,90 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var resultTV : TextView
+    lateinit var privTV : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         resultTV = findViewById(R.id.calcScreen)
+        privTV = findViewById(R.id.privScreen)
+
 
     }
 
     override fun onClick(v: View?) {
         val eval = evaluate()
-        var result = resultTV.text
-        if (result.length <= 35) {
+        val input = resultTV.text
+        var result = ""
+        if (input.length <= 35) {
             when (v?.id) {
                 R.id.button0 -> {
-                    result = "$result" + "0"
+                    result = "$input" + "0"
                 }
                 R.id.button1 -> {
-                    result = "$result" + "1"
+                    result = "$input" + "1"
                 }
 
                 R.id.button2 -> {
-                    result = "$result" + "2"
+                    result = "$input" + "2"
                 }
 
                 R.id.button3 -> {
-                    result = "$result" + "3"
+                    result = "$input" + "3"
                 }
 
                 R.id.button4 -> {
-                    result = "$result" + "4"
+                    result = "$input" + "4"
                 }
 
                 R.id.button5 -> {
-                    result = "$result" + "5"
+                    result = "$input" + "5"
                 }
 
                 R.id.button6 -> {
-                    result = "$result" + "6"
+                    result = "$input" + "6"
                 }
 
                 R.id.button7 -> {
-                    result = "$result" + "7"
+                    result = "$input" + "7"
                 }
 
                 R.id.button8 -> {
-                    result = "$result" + "8"
+                    result = "$input" + "8"
                 }
 
                 R.id.button9 -> {
-                    result = "$result" + "9"
+                    result = "$input" + "9"
                 }
 
                 R.id.buttonP -> {
-                    result = "$result + "
+                    result = "$input + "
                 }
 
                 R.id.buttonM -> {
-                    result = "$result - "
+                    result = "$input - "
                 }
 
                 R.id.buttonD -> {
-                    result = "$result / "
+                    result = "$input / "
                 }
 
                 R.id.buttonX -> {
-                    result = "$result * "
+                    result = "$input * "
                 }
 
                 R.id.buttonRightP -> {
-                    result = "$result ( "
+                    result = "$input ( "
                 }
 
                 R.id.buttonLeftP -> {
-                    result = "$result ) "
+                    result = "$input ) "
                 }
                 R.id.buttonPeriod -> {
-                    result = "$result."
+                    result = "$input."
                 }
                 R.id.buttonN -> {
-                    result = "$result-"
+                    result = "$input-"
                 }
             }
             resultTV.text = result
@@ -94,13 +98,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         if(v?.id == R.id.buttonE)
         {
-            result = eval.evalEquals(result.toString())
+            result = eval.evalEquals(input.toString())
             resultTV.text = result
+            privTV.text = input
         }
         if(v?.id == R.id.buttonClear)
         {
             result = ""
             resultTV.text = result
+            privTV.text = result
         }
     }
 }
